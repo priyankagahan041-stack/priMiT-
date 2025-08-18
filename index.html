@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Happy Birthday❤️</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      background: url('https://media1.tenor.com/m/KcREzPtBb-0AAAAC/cute-cheeks.gif') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: rgba(255,255,255,0.6);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    body > .slide-container {
+      flex: 1;
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      box-sizing: border-box;
+      padding: clamp(20px, 5vh, 50px) clamp(10px, 5vw, 50px);
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    img {
+      max-width: 90%;
+      max-height: 50vh;
+      object-fit: contain;
+      border-radius: 20px;
+      margin: clamp(10px, 3vh, 20px) 0;
+      user-select: none;
+    }
+
+    p, h1, h2 {
+      font-size: clamp(1rem, 2.5vw, 2.5rem);
+      font-weight: bold;
+      color: black;
+      text-shadow: 1px 1px 3px white, -1px -1px 2px white;
+      margin: clamp(6px, 1.5vh, 12px) 0;
+      user-select: none;
+    }
+
+    button {
+      background: #ff3366;
+      color: white;
+      border: none;
+      padding: clamp(8px, 1.5vh, 16px) clamp(15px, 3vw, 40px);
+      margin: clamp(8px, 1.5vh, 16px);
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: clamp(1rem, 2vw, 1.8rem);
+      font-weight: bold;
+      transition: background 0.3s;
+      z-index: 2;
+      position: relative;
+      user-select: none;
+      min-width: 120px;
+      white-space: nowrap;
+    }
+
+    button:hover {
+      background: #ff6699;
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 9999;
+      display: none; /* hidden initially */
+    }
+
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 6vw;
+      animation: fall 4s linear forwards;
+      user-select: none;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh); }
+      100% { transform: translateY(110vh); }
+    }
+
+    .dodge {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: top 0.3s ease, left 0.3s ease;
+    }
+
+    .side-by-side {
+      display: flex;
+      justify-content: center;
+      gap: clamp(10px, 3vw, 30px);
+      margin-bottom: clamp(10px, 3vh, 20px);
+    }
+
+    .side-by-side img {
+      max-width: 45%;
+      max-height: 50vh;
+      border-radius: 20px;
+      object-fit: contain;
+      user-select: none;
+      margin: 0;
+    }
+
+    @media (max-width: 600px) {
+      p, h1, h2 {
+        font-size: clamp(0.9rem, 3vw, 1.5rem);
+      }
+      button {
+        font-size: clamp(0.9rem, 3vw, 1.3rem);
+        padding: clamp(6px, 2vw, 12px) clamp(12px, 4vw, 20px);
+        min-width: 100px;
+      }
+      img {
+        max-height: 40vh;
+      }
+      .side-by-side {
+        flex-direction: column;
+        gap: clamp(10px, 3vh, 20px);
+      }
+      .side-by-side img {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="overlay"></div>
+
+<div class="slide-container">
+
+  <!-- Slide 1 -->
+  <div class="slide active" id="slide1">
+    <h1>Helloo Baby❤️</h1>
+    <img src="https://i.postimg.cc/T1Rz0RyJ/2025-08-18-03-01-33-493.jpg" alt="His Pic" />
+    <p>To my favourite😚😍 Happy Birthday to the one who makes my world brighter every single day!</p>
+    <button onclick="nextSlide(2)">Agee toh dekh😁</button><br />
+    <button id="playSongBtn">Click Here👉🏻To Play the Song🎵</button>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide" id="slide2">
+    <img src="https://i.postimg.cc/13zd4C64/Screenshot-2025-08-18-051704.png" alt="His Pic 2" />
+    <p>See ik YOU r very very INNOCEEEEENT but not more innocent than me ..pls mere jaise innocent ki baat jaldi mann lena ji</p>
+    <p>Dekho i know mene pehele bina bole kuch bhi kiya ho..jo bhi kiya ho ..uske liye maafi jaan ❤️<br />Pr ab toh apki baat mante hain na?</p>
+    <button onclick="heartsPage()">Hanji manti ho🤍</button>
+    <button onclick="sorryLine()">Nhi manti bahut badmash ho aap😝😋</button>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide" id="slide3">
+    <p>You know… birthdays are about making wishes, right? Well Birthday apka hai wish meri hai ..please (Everything is fair here)</p>
+    <button onclick="nextSlide(4)">Hanji bolo🫣</button>
+    <button onclick="nextSlide(4)">Kabhi mana kiya mene...motii😋</button>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide" id="slide4">
+    <div class="side-by-side">
+      <img src="https://i.postimg.cc/YSGyzvdH/2025-08-18-03-30-02-330.jpg" alt="Pic 1" />
+      <img src="https://i.postimg.cc/9FDTMy0C/2025-08-18-03-30-02-356.jpg" alt="Pic 2" />
+    </div>
+    <p id="q4">Ase kon karwayega tereko..bol? koi milegi</p>
+    <button id="btn1" onclick="bhagOption()">Han aram se mil jayegi, HANDSOME jo hun(😎)</button>
+    <button id="btn2" onclick="nextSlide(5)">Chahiye bhi nhi😗</button>
+  </div>
+
+  <!-- Slide 5 -->https://files.catbox.moe/pphjdk.jpg
+  <div class="slide" id="slide5" style="position: relative;">
+    <img src="https://i.postimg.cc/FFxY4NP7/image.jpg" alt="Couple Pic">
+    <h2>Don't you think we look good together?🫠🫣</h2>
+    <button class="dodge" id="noBtn">Nahhh</button>
+    <button onclick="yesLine()">YESSSSS OFC</button>
+  </div>
+
+<!-- Slide 6 -->
+<div class="slide" id="slide6" style="position: relative;">
+  <h1>WILL YOU BE MY Boyfriend❤️?</h1>
+  <div class="side-by-side">
+    <!-- First GIF -->
+    <img src="https://i.pinimg.com/originals/d8/b9/71/d8b97168488fdb3eb9533da493c8fa95.gif" alt="Final Gif">
+    
+    <!-- New Image between the GIFs -->
+    <img src="https://i.postimg.cc/YqnHHqJ2/IMG-20250811-WA0042.jpg" alt="Pic Between GIFs" style="max-width: 20%; max-height: 50vh; object-fit: contain; border-radius: 15px;">
+    
+    <!-- Second GIF (your provided GIF) -->
+    <img src="https://media.tenor.com/Je68nyCU_j8AAAAj/bubu-dudu-bubu-dudu-love.gif" alt="Bubu Dudu Love GIF">
+  </div>
+  <button class="dodge" id="thinkBtn">Socha parega</button>
+  <button onclick="finalLove()">YESSSSSS Baby🤍</button>
+  <br /><br />
+</div>
+
+</div>
+
+<!-- Audio -->
+<audio id="bgSong" src="https://files.catbox.moe/e1az47.mp3"></audio>
+
+<!-- Hearts Container -->
+<div class="hearts" id="hearts"></div>
+
+<script>
+let currentSlide = 1;
+let bgSong = document.getElementById("bgSong");
+
+document.getElementById("playSongBtn").addEventListener("click", function () {
+  bgSong.play();
+  this.style.display = "none";
+});
+
+function nextSlide(n) {
+  document.getElementById("slide" + currentSlide).classList.remove("active");
+  document.getElementById("slide" + n).classList.add("active");
+  currentSlide = n;
+}
+
+function heartsPage() {
+  document.getElementById("slide2").innerHTML =
+    "<h1>Oye Jaan sunn na</h1><p>❤️</p><button onclick='nextSlide(3)'>Hanji kachua🐢..Bolo</button>";
+}
+
+function sorryLine() {
+  alert("Pitenge re ..konsa baat nhi mana mene😒🖕🏻");
+  nextSlide(3);
+}
+
+function bhagOption() {
+  document.getElementById("slide4").innerHTML = `
+    <h1>Bhaag Be!! 😝</h1>
+    <button onclick="nextSlide(5)">Sorry I love you jaan😝🤍</button>
+  `;
+}
+
+function yesLine() {
+  alert("I KNEW IT!! 😎❤️");
+  const slide5 = document.getElementById("slide5");
+  slide5.innerHTML = `
+    <img src="https://i.postimg.cc/FFxY4NP7/image.jpg" alt="Couple Pic">
+    <p>MY WISH IS — I want us to be more than this.<br>Will you be mine? ❤️</p>
+    <button onclick="nextSlide(6)">Hanji Jaan 🤍</button>
+    
+    <button onclick="extraPage()">Na patane mei aur mehenat lagega</button>
+  `;
+}
+
+function extraPage() {
+  document.getElementById("slide5").innerHTML = `
+ <img src="https://i.postimg.cc/wvjjxs4M/IMG-20250610-WA0127.jpg" alt="Couple Pic">
+
+    
+    <button onclick="nextSlide(6)">Ok mann gaya</button>
+    <button onclick="nextSlide(6)">Paglait mei innocent hun..mann gaya tha pehele hee😁😗</button>
+  `;
+}
+
+// Heart falling animation setup
+const heartsContainer = document.getElementById('hearts');
+
+function createHeart() {
+  const heart = document.createElement('span');
+  heart.classList.add('heart');
+  heart.textContent = '❤️';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.animationDuration = (3 + Math.random() *3) + 's';
+  heartsContainer.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+
+// Start/stop hearts
+let heartInterval = null;
+function startHearts() {
+  if (heartInterval) return;
+  heartsContainer.style.display = 'block';
+  heartInterval = setInterval(createHeart, 400);
+}
+function stopHearts() {
+  if (heartInterval) {
+    clearInterval(heartInterval);
+    heartInterval = null;
+    heartsContainer.innerHTML = '';
+    heartsContainer.style.display = 'none';
+  }
+}
+
+// Call hearts only on finalLove
+function finalLove() {
+  startHearts(); // start hearts animation
+  document.getElementById("slide6").innerHTML += "<h2>Hey Boyfie...I love you my KHARUS❤️</h2>";
+  setTimeout(() => {
+    alert("YAYYYY! Love you forever! ❤️");
+  }, 3000);
+}
+
+// Dodge button movement
+document.addEventListener("mousemove", function (e) {
+  let dodge = document.querySelectorAll(".dodge");
+  dodge.forEach((btn) => {
+    let rect = btn.getBoundingClientRect();
+    let dx = e.clientX - (rect.left + rect.width / 2);
+    let dy = e.clientY - (rect.top + rect.height / 2);
+    if (Math.abs(dx) < 80 && Math.abs(dy) < 50) {
+      btn.style.left = Math.min(Math.max(10, Math.random() * 80), 90) + "vw";
+      btn.style.top = Math.min(Math.max(10, Math.random() * 80), 90) + "vh";
+    }
+  });
+});
+</script>
+
+</body>
+</html>

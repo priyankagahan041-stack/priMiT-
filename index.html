@@ -1,252 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-<title>Happy Birthday❤️</title>
-<style>
-:root {
-  --pad-v: clamp(20px, 5vh, 50px);
-  --pad-h: clamp(10px, 5vw, 50px);
-  --content-max: 1000px;
-}
-html, body {
-  margin:0; padding:0; height:100%; width:100%; font-family:Arial,sans-serif; overflow:hidden; background:#fff;
-}
-.slide-container { position:relative; width:100vw; height:100vh; overflow:hidden; z-index:1; }
-.slide {
-  position:absolute; inset:0; display:none; align-items:center; justify-content:center;
-  text-align:center; padding:var(--pad-v) var(--pad-h); overflow:auto; z-index:2; background:transparent;
-}
-.slide.active { display:flex; }
-.slide::before {
-  content:""; position:absolute; inset:0; background-position:center; background-repeat:no-repeat; background-size:contain;
-  z-index:-2; pointer-events:none;
-}
-.slide::after {
-  content:""; position:absolute; inset:0; background:rgba(255,255,255,0.55); z-index:-1; pointer-events:none;
-}
-#slide1::before { background-image:url('https://media1.tenor.com/m/1jKnE-r5T-EAAAAd/milk-and-mocha-bears-sad.gif'); }
-#slide2::before { background-image:url('https://i.pinimg.com/originals/69/66/48/69664884a33ecc5049a40b4b02bd182f.gif'); }
-#slide3::before { background-image:url('https://media.tenor.com/ZJ0t7DP3FjMAAAAj/milk-and-mocha-gif-mocha-makeing-love.gif'); }
-#slide4::before { background-image:url('https://media3.giphy.com/media/JRsQiAN79bPWUv43Ko/source.gif'); }
-#slide5::before { background-image:url('https://i.pinimg.com/originals/96/91/0a/96910a7cedeff19c958ac2a78286bd6f.gif'); }
-#slide6::before { background-image:url('https://c.tenor.com/KcREzPtBb-0AAAAC/tenor.gif'); background-size:cover; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>Happy Birthday❤️</title>
+  <style>
+    :root {
+      --pad-v: clamp(20px, 5vh, 50px);
+      --pad-h: clamp(10px, 5vw, 50px);
+      --content-max: 1000px;
+    }
 
-.content { width:min(90vw,var(--content-max)); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:clamp(8px,2vh,18px);}
-img { max-width:90%; max-height:50vh; object-fit:contain; border-radius:20px; user-select:none;}
-h1,h2,p{ margin:0; color:#000; font-weight:bold; text-shadow:1px 1px 3px #fff,-1px -1px 2px #fff; user-select:none;}
-h1{font-size:clamp(1.5rem,4vw,2.5rem);} h2{font-size:clamp(1.2rem,3.2vw,2rem);} p{font-size:clamp(1rem,2.6vw,1.6rem);}
-button { background:#ff3366; color:#fff; border:none; padding:clamp(8px,1.8vh,16px) clamp(16px,3.5vw,40px); border-radius:999px; cursor:pointer; font-size:clamp(1rem,2.2vw,1.4rem); font-weight:800; transition: transform .08s ease, background .2s ease; user-select:none; white-space:nowrap;}
-button:hover { background:#ff5c8a;} button:active{ transform: scale(0.98);}
-.dodge{position:relative;}
-.side-by-side{width:100%; display:flex; justify-content:center; align-items:center; gap:clamp(12px,3vw,30px); flex-wrap:wrap;}
-.side-by-side img{max-width:45%; max-height:50vh; margin:0;}
-@media(max-width:600px){ img{max-height:40vh;} .side-by-side img{max-width:90%;} }
-#slide3 p{ font-size: clamp(0.9rem,2.2vw,1.4rem); }
+    html, body {
+      margin: 0; padding: 0;
+      height: 100%; width: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      background: #fff;
+    }
 
-/* Hearts rain */
-.hearts { position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:9999; display:none; }
-.heart { position:absolute; color:red; font-size:6vw; animation:fall 4s linear forwards; user-select:none; }
-@keyframes fall { 0%{transform:translateY(-10vh);} 100%{transform:translateY(110vh);} }
-</style>
+    .slide-container {
+      position: relative;
+      width: 100vw; height: 100vh;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .slide {
+      position: absolute; inset: 0;
+      display: none; /* toggled by .active */
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: var(--pad-v) var(--pad-h);
+      overflow: auto;
+      z-index: 2;
+      background: transparent;
+    }
+    .slide.active { display: flex; }
+
+    .slide::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      z-index: -2;
+      pointer-events: none;
+    }
+    .slide::after {
+      content: "";
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,0.55);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    #slide1::before { background-image: url('https://media1.tenor.com/m/1jKnE-r5T-EAAAAd/milk-and-mocha-bears-sad.gif'); }
+    #slide2::before { background-image: url('https://i.pinimg.com/originals/69/66/48/69664884a33ecc5049a40b4b02bd182f.gif'); }
+    #slide3::before { background-image: url('https://media.tenor.com/ZJ0t7DP3FjMAAAAj/milk-and-mocha-gif-mocha-makeing-love.gif'); }
+    #slide4::before { background-image: url('https://media3.giphy.com/media/JRsQiAN79bPWUv43Ko/source.gif'); }
+    #slide5::before { background-image: url('https://i.pinimg.com/originals/96/91/0a/96910a7cedeff19c958ac2a78286bd6f.gif'); }
+    #slide6::before {
+      background-image: url('https://c.tenor.com/KcREzPtBb-0AAAAC/tenor.gif');
+      background-size: cover;
+    }
+
+    .content {
+      width: min(90vw, var(--content-max));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(8px, 2vh, 18px);
+    }
+
+    img {
+      max-width: 90%;
+      max-height: 50vh;
+      object-fit: contain;
+      border-radius: 20px;
+      user-select: none;
+    }
+
+    h1, h2, p {
+      margin: 0;
+      color: #000;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px #fff, -1px -1px 2px #fff;
+      user-select: none;
+    }
+    h1 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+    h2 { font-size: clamp(1.2rem, 3.2vw, 2rem); }
+    p  { font-size: clamp(1rem, 2.6vw, 1.6rem); }
+
+    button {
+      background: #ff3366;
+      color: #fff;
+      border: none;
+      padding: clamp(8px, 1.8vh, 16px) clamp(16px, 3.5vw, 40px);
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: clamp(1rem, 2.2vw, 1.4rem);
+      font-weight: 800;
+      transition: transform .08s ease, background .2s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+    button:hover { background: #ff5c8a; }
+    button:active { transform: scale(0.98); }
+
+    .dodge { position: relative; }
+
+    .side-by-side {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: clamp(12px, 3vw, 30px);
+      flex-wrap: wrap;
+    }
+    .side-by-side img {
+      max-width: 45%;
+      max-height: 50vh;
+      margin: 0;
+    }
+
+    @media (max-width: 600px) {
+      img { max-height: 40vh; }
+      .side-by-side img { max-width: 90%; }
+    }
+
+    #slide3 p { font-size: clamp(0.9rem, 2.2vw, 1.4rem); }
+
+    /* Hearts rain */
+    .hearts {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 9999;
+      display: none;
+    }
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 6vw;
+      animation: fall 4s linear forwards;
+      user-select: none;
+    }
+    @keyframes fall {
+      0%   { transform: translateY(-10vh); }
+      100% { transform: translateY(110vh); }
+    }
+
+    /* Extra buttons styling */
+    .extra-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+    }
+  </style>
 </head>
 <body>
 
-<div class="slide-container">
+  <div class="slide-container">
 
-<!-- Slide 1 -->
-<section class="slide active" id="slide1">
-  <div class="content">
-    <h1>Hey..long time no see?😊</h1>
-    <p>Sorry for treating u so badly before some months..most apx. 1yr</p>
-    <button id="playSongBtn">Play song 👉🏻 This song reminds me of you 🎵</button>
-    <button id="okBtn" style="display:none;" onclick="nextSlide(2)">It's Okay..no worries cutie ❤️</button>
+    <!-- Slide 1 -->
+    <section class="slide active" id="slide1">
+      <div class="content">
+        <h1>Hey..long time no see?😊</h1>
+        <p>Sorry for treating u so badly before some months..most apx. 1yr</p>
+        <button id="playSongBtn">Play song 👉🏻 This song reminds me of you 🎵</button>
+        <button id="okBtn" style="display:none;" onclick="nextSlide(2)">It's Okay..no worries cutie ❤️</button>
+      </div>
+    </section>
+
+    <!-- Slide 2 -->
+    <section class="slide" id="slide2">
+      <div class="content">
+        <h1>Helloo Baby ❤️</h1>
+        <img src="https://i.postimg.cc/T1Rz0RyJ/2025-08-18-03-01-33-493.jpg" alt="His Pic" />
+        <p>To my favourite 😚😍 Happy Birthday to the one who makes my world brighter every single day!</p>
+        <button onclick="nextSlide(3)">Agee toh dekh 😁</button>
+      </div>
+    </section>
+
+    <!-- Slide 3 -->
+    <section class="slide" id="slide3">
+      <div class="content">
+        <img src="https://i.postimg.cc/13zd4C64/Screenshot-2025-08-18-051704.png" alt="His Pic 2" />
+        <p>Hii my Hot sizziling boy 🫣</p>
+        <p>Dekho i know mene pehele bina bole kuch bhi kiya ho..jo bhi kiya ho..uske liye maafi jaan 🥺❤️<br>Pr ab toh apki baat mante hain na?</p>
+        <div>
+          <button onclick="heartsPage()">Hanji manti ho 🤍</button>
+          <button onclick="sorryLine()">Nhi manti bahut badmash ho aap 😝😋</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4 -->
+    <section class="slide" id="slide4">
+      <div class="content">
+        <div class="side-by-side">
+          <img src="https://i.postimg.cc/YSGyzvdH/2025-08-18-03-30-02-330.jpg" alt="Pic 1" />
+          <img src="https://i.postimg.cc/9FDTMy0C/2025-08-18-03-30-02-356.jpg" alt="Pic 2" />
+        </div>
+        <p id="q4">Ase kon karwayega tereko..bol ? koi milegi</p>
+        <div>
+          <button id="btn1" onclick="bhagOption()">Han aram se mil jayegi, HANDSOME jo hun (😎)</button>
+          <button id="btn2" onclick="nextSlide(5)">Chahiye bhi nhi 😗</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5 -->
+    <section class="slide" id="slide5">
+      <div class="content">
+        <img src="https://i.postimg.cc/FFxY4NP7/image.jpg" alt="Couple Pic">
+        <h2>Don't you think we look great together? 🫠🫣</h2>
+        <div>
+          <button class="dodge" id="noBtn">Nahhh</button>
+          <button onclick="yesLine()">ofc..yeh bhi puchne wali baat h? 🤍</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6 -->
+    <section class="slide" id="slide6">
+      <div class="content">
+        <h1>WILL YOU BE MY Boyfriend ❤️?</h1>
+        <div class="side-by-side">
+          <img src="https://i.pinimg.com/originals/d8/b9/71/d8b97168488fdb3eb9533da493c8fa95.gif" alt="Final Gif">
+          <img src="https://i.postimg.cc/YqnHHqJ2/IMG-20250811-WA0042.jpg" alt="Pic Between GIFs"
+               style="max-width: 20%; max-height: 50vh; object-fit: contain; border-radius: 15px;">
+          <img src="https://media.tenor.com/Je68nyCU_j8AAAAj/bubu-dudu-bubu-dudu-love.gif" alt="Bubu Dudu Love GIF">
+        </div>
+        <div>
+          <button class="dodge" id="thinkBtn">Socha parega</button>
+          <button onclick="finalLove()">YESSSSSS Baby 🤍</button>
+        </div>
+      </div>
+    </section>
+
   </div>
-</section>
 
-<!-- Slide 2 -->
-<section class="slide" id="slide2">
-  <div class="content">
-    <h1>Helloo Baby ❤️</h1>
-    <img src="https://i.postimg.cc/T1Rz0RyJ/2025-08-18-03-01-33-493.jpg" alt="His Pic" />
-    <p>To my favourite 😚😍 Happy Birthday to the one who makes my world brighter every single day!</p>
-    <button onclick="nextSlide(3)">Agee toh dekh 😁</button>
-  </div>
-</section>
+  <!-- Audio -->
+  <audio id="bgSong" src="https://files.catbox.moe/e1az47.mp3"></audio>
 
-<!-- Slide 3 -->
-<section class="slide" id="slide3">
-  <div class="content">
-    <img src="https://i.postimg.cc/13zd4C64/Screenshot-2025-08-18-051704.png" alt="His Pic 2" />
-    <p>Hii my Hot sizziling boy 🫣</p>
-    <p>Dekho i know mene pehele bina bole kuch bhi kiya ho..jo bhi kiya ho..uske liye maafi jaan 🥺❤️<br>Pr ab toh apki baat mante hain na?</p>
-    <div>
-      <button onclick="heartsPage()">Hanji manti ho 🤍</button>
-      <button onclick="sorryLine()">Nhi manti bahut badmash ho aap 😝😋</button>
-    </div>
-  </div>
-</section>
+  <div class="hearts" id="hearts"></div>
 
-<!-- Slide 4 -->
-<section class="slide" id="slide4">
-  <div class="content" id="slide4Content">
-    <div class="side-by-side">
-      <img src="https://i.postimg.cc/YSGyzvdH/2025-08-18-03-30-02-330.jpg" alt="Pic 1" />
-      <img src="https://i.postimg.cc/9FDTMy0C/2025-08-18-03-30-02-356.jpg" alt="Pic 2" />
-    </div>
-    <p id="q4">Ase kon karwayega tereko..bol ? koi milegi</p>
-    <div>
-      <button id="btn1" onclick="bhagOption()">Han aram se mil jayegi, HANDSOME jo hun (😎)</button>
-      <button id="btn2" onclick="nextSlide(5)">Chahiye bhi nhi 😗</button>
-    </div>
-  </div>
-</section>
+  <script>
+    let currentSlide = 1;
+    const bgSong = document.getElementById("bgSong");
 
-<!-- Slide 5 -->
-<section class="slide" id="slide5">
-  <div class="content" id="slide5Content">
-    <img src="https://i.postimg.cc/FFxY4NP7/image.jpg" alt="Couple Pic">
-    <h2>Don't you think we look great together? 🫠🫣</h2>
-    <div>
-      <button class="dodge" id="noBtn">Nahhh</button>
-      <button id="yesBtnSlide5" onclick="yesLine()">ofc..yeh bhi puchne wali baat h? 🤍</button>
-    </div>
-  </div>
-</section>
-
-<!-- Slide 6 -->
-<section class="slide" id="slide6">
-  <div class="content" id="slide6Content">
-    <h1>WILL YOU BE MY Boyfriend ❤️?</h1>
-    <div class="side-by-side">
-      <img src="https://i.pinimg.com/originals/d8/b9/71/d8b97168488fdb3eb9533da493c8fa95.gif" alt="Final Gif">
-      <img src="https://i.postimg.cc/YqnHHqJ2/IMG-20250811-WA0042.jpg" alt="Pic Between GIFs" style="max-width:20%; max-height:50vh; object-fit:contain; border-radius:15px;">
-      <img src="https://media.tenor.com/Je68nyCU_j8AAAAj/bubu-dudu-bubu-dudu-love.gif" alt="Bubu Dudu Love GIF">
-    </div>
-    <div>
-      <button class="dodge" id="thinkBtn">Socha parega</button>
-      <button id="yesFinalBtn" onclick="finalLove()">YESSSSSS Baby 🤍</button>
-    </div>
-  </div>
-</section>
-
-</div>
-
-<audio id="bgSong" src="https://files.catbox.moe/e1az47.mp3"></audio>
-<div class="hearts" id="hearts"></div>
-
-<script>
-let currentSlide = 1;
-const bgSong = document.getElementById("bgSong");
-
-function nextSlide(n){
-  document.getElementById("slide"+currentSlide).classList.remove("active");
-  document.getElementById("slide"+n).classList.add("active");
-  currentSlide = n;
-  attachMobileDodge();
-}
-
-document.getElementById("playSongBtn").addEventListener("click", ()=>{
-  bgSong.play().catch(()=>{});
-  document.getElementById("playSongBtn").style.display="none";
-  document.getElementById("okBtn").style.display="inline-block";
-});
-
-function heartsPage(){
-  document.getElementById("slide3").innerHTML = `
-  <div class="content">
-    <h1>Oye Jaan sunn na</h1>
-    <p>❤️</p>
-    <button onclick="nextSlide(4)">Hanji kachua 🐢..Bolo</button>
-  </div>`;
-}
-
-function sorryLine(){ nextSlide(4); }
-
-function bhagOption(){
-  document.getElementById("slide4").innerHTML = `
-  <div class="content">
-    <h1>Bhaag Be!! 😝</h1>
-    <button onclick="nextSlide(5)">Sorry I love you jaan 😝🤍</button>
-  </div>`;
-}
-
-function yesLine(){
-  alert("I KNEW IT!! 😎❤️");
-  document.getElementById("slide5Content").innerHTML = `
-  <img src="https://i.postimg.cc/FFxY4NP7/image.jpg" alt="Couple Pic">
-  <p>MY WISH IS — I want us to be more than this.<br>Will you be mine? ❤️</p>
-  <div>
-    <button onclick="nextSlide(6)">Hanji Jaan 🤍</button>
-    <button onclick="extraPage()">Na patane mei aur mehenat lagega</button>
-  </div>`;
-}
-
-function extraPage(){
-  document.getElementById("slide5Content").innerHTML = `
-  <img src="https://i.postimg.cc/wvjjxs4M/IMG-20250610-WA0127.jpg" alt="Couple Pic">
-  <div>
-    <button onclick="nextSlide(6)">Ok mann gaya</button>
-    <button onclick="nextSlide(6)">Paglait mei innocent hun..mann gaya tha pehele hee 😁😗</button>
-  </div>`;
-}
-
-// Hearts
-const heartsContainer = document.getElementById('hearts');
-let heartInterval = null;
-function createHeart(){
-  const heart = document.createElement('span');
-  heart.className='heart';
-  heart.textContent='❤️';
-  heart.style.left=Math.random()*100+'vw';
-  heart.style.animationDuration=(3+Math.random()*3)+'s';
-  heartsContainer.appendChild(heart);
-  setTimeout(()=>heart.remove(),6000);
-}
-function startHearts(){
-  if(heartInterval) return;
-  heartsContainer.style.display='block';
-  heartInterval=setInterval(createHeart,400);
-}
-
-function finalLove(){
-  startHearts();
-  const c=document.querySelector('#slide6 .content');
-  c.insertAdjacentHTML('beforeend',`<h2>Hey Boyfie...I love you my KHARUS ❤️</h2>`);
-  setTimeout(()=>{alert("YAYYYY! Love you forever! ❤️");},3000);
-}
-
-// Desktop dodge hover
-function handleDodgeHover(e){
-  document.querySelectorAll(".dodge").forEach(btn=>{
-    const rect=btn.getBoundingClientRect();
-    const dx=e.clientX-(rect.left+rect.width/2);
-    const dy=e.clientY-(rect.top+rect.height/2);
-    if(Math.abs(dx)<100 && Math.abs(dy)<80){
-      const newLeft=Math.random()*(window.innerWidth-rect.width);
-      const newTop=Math.random()*(window.innerHeight-rect.height);
-      btn.style.position="fixed";
-      btn.style.left=newLeft+"px";
-      btn.style.top=newTop+"px";
+    function nextSlide(n) {
+      const oldEl = document.getElementById("slide" + currentSlide);
+      const newEl = document.getElementById("slide" + n);
+      if (!newEl) return;
+      oldEl.classList.remove("active");
+      newEl.classList.add("active");
+      currentSlide = n;
     }
-  });
-}
 
-// Mobile-friendly dodge click
-function attachMobileDodge(){
-  if(window.innerWidth>768) return;
-  const noBtn = document.getElementById("noBtn");
-  if(noBtn) noBtn.onclick = ()=>{ alert("Fuck offff"); };
-  const thinkBtn = document.getElementById("thinkBtn");
-  if(thinkBtn) thinkBtn.onclick = ()=>{ alert("Hein??"); };
-}
+    const playBtn = document.getElementById("playSongBtn");
+    const okBtn = document.getElementById("okBtn");
+    playBtn.addEventListener("click", () => {
+      bgSong.play().catch(()=>{});
+      playBtn.style.display = "none";
+      okBtn.style.display = "inline-block";
+    });
 
-if(window.innerWidth>768){
-  document.addEventListener("mousemove", handleDodgeHover);
-}else{
-  attachMobileDodge();
-}
-</script>
+    function heartsPage(){
+      document.getElementById("slide3").innerHTML = `
+        <div class="content">
+          <h1>Oye Jaan sunn na</h1>
+          <p>❤️</p>
+          <button onclick="nextSlide(4)">Hanji kachua 🐢..Bolo</button>
+        </div>`;
+    }
+
+    function sorryLine(){
+      alert("Pitenge re ..konsa baat nhi mana mene 😒🖕🏻");
+      nextSlide(4);
+    }
+
+    function bhagOption(){
+      document.getElementById("slide4").innerHTML = `
+        <div class="content">
+          <h1>Bhaag Be!! 😝</h1>
+          <button onclick="nextSlide(5)">Sorry I love you jaan 😝🤍</button>
+        </div>`;
+    }
+
+    function yesLine(){
+      alert("I KNEW IT!! 😎❤️");
+      document.getElementById("slide5").innerHTML = `
+        <div class="content">
+          <img src="https://i.postimg.cc/FFxY4NP7/image.jpg" alt="Couple Pic">
+          <p>MY WISH IS — I want us to be more than this.<br>Will you be mine? ❤️</p>
+          <div>
+            <button onclick="nextSlide(6)">Hanji Jaan 🤍</button>
+            <button onclick="extraPage()">Na patane mei aur mehenat lagega</button>
+          </div>
+        </div>`;
+    }
+
+    function extraPage(){
+      document.getElementById("slide5").innerHTML = `
+        <div class="content">
+          <img src="https://i.postimg.cc/wvjjxs4M/IMG-20250610-WA0127.jpg" alt="Couple Pic">
+          <div class="extra-buttons">
+            <button onclick="nextSlide(6)">Ok mann gaya</button>
+            <button onclick="nextSlide(6)">Paglait mei innocent hun..mann gaya tha pehele hee 😁😗</button>
+          </div>
+        </div>`;
+    }
+
+    const heartsContainer = document.getElementById('hearts');
+    function createHeart(){
+      const heart = document.createElement('span');
+      heart.className = 'heart';
+      heart.textContent = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (3 + Math.random()*3) + 's';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    let heartInterval = null;
+    function startHearts(){
+      if (heartInterval) return;
+      heartsContainer.style.display = 'block';
+      heartInterval = setInterval(createHeart, 400);
+    }
+    function stopHearts(){
+      if (!heartInterval) return;
+      clearInterval(heartInterval);
+      heartInterval = null;
+      heartsContainer.innerHTML = '';
+      heartsContainer.style.display = 'none';
+    }
+
+    function finalLove(){
+      startHearts();
+      const c = document.querySelector('#slide6 .content');
+      c.insertAdjacentHTML('beforeend', `<h2>Hey Boyfie...I love you my KHARUS ❤️</h2>`);
+      setTimeout(() => { alert("YAYYYY! Love you forever! ❤️"); }, 3000);
+    }
+
+    document.addEventListener("mousemove", function(e){
+      document.querySelectorAll(".dodge").forEach(btn => {
+        const rect = btn.getBoundingClientRect();
+        const dx = e.clientX - (rect.left + rect.width/2);
+        const dy = e.clientY - (rect.top + rect.height/2);
+        if (Math.abs(dx) < 100 && Math.abs(dy) < 80) {
+          const newLeft = Math.random() * (window.innerWidth - rect.width);
+          const newTop  = Math.random() * (window.innerHeight - rect.height);
+          btn.style.position = "fixed";
+          btn.style.left = newLeft + "px";
+          btn.style.top  = newTop  + "px";
+        }
+      });
+    });
+  </script>
 </body>
 </html>

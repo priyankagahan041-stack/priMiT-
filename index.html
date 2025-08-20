@@ -237,175 +237,92 @@
         <!-- Slide 3 -->
         <section class="slide" id="slide3">
           <div class="content">
-            <img src="https://i.postimg.cc/13zd4C64/Screenshot-2025-08-18-051704.png" alt="His Pic 2" />
-            <p>Hii my Hot sizziling boy 🫣</p>
-            <p>Dekho i know mene pehele bina bole kuch bhi kiya ho..jo bhi kiya ho..uske liye maafi jaan 🥺❤️<br>Pr ab toh apki baat mante hain na?</p>
-            <div>
-              <button onclick="heartsPage()">Hanji manti ho 🤍</button>
-              <button onclick="sorryLine()">Nhi manti bahut badmash ho aap 😝😋</button>
+            <h1>Feeling special? ❤️‍🔥</h1>
+            <p>Because you deserve all the love and happiness in the world, today and always.</p>
+            <div class="side-by-side">
+              <img src="https://i.postimg.cc/Dz6KNnGh/IMG-20230519-144858-01.jpg" alt="Cute couple" />
+              <img src="https://i.postimg.cc/xjNx6HYg/IMG-20230519-145024-01.jpg" alt="Cute couple" />
             </div>
+            <button onclick="nextSlide(4)">Yes, Love youuuuu ❤️</button>
+            <button class="dodge" id="noBtn">Noooo 🙅🏻‍♀️</button>
           </div>
         </section>
 
         <!-- Slide 4 -->
         <section class="slide" id="slide4">
           <div class="content">
-            <div class="side-by-side">
-              <img src="https://i.postimg.cc/YSGyzvdH/2025-08-18-03-30-02-330.jpg" alt="Pic 1" />
-              <img src="https://i.postimg.cc/9FDTMy0C/2025-08-18-03-30-02-356.jpg" alt="Pic 2" />
-            </div>
-            <p id="q4">Ase kon karwayega tereko..bol ? koi milegi</p>
-            <div>
-              <button id="btn1" onclick="bhagOption()">Han aram se mil jayegi, HANDSOME jo hun (😎)</button>
-              <button id="btn2" onclick="nextSlide(5)">Chahiye bhi nhi 😗</button>
-            </div>
+            <h1>Let's see if I can dodge your "No" 😎</h1>
+            <p>Try to click "No" button 😉</p>
+            <button id="yesBtn">Yes ❤️</button>
+            <button id="noBtn2" class="dodge">No 🙅🏻‍♀️</button>
           </div>
         </section>
 
         <!-- Slide 5 -->
         <section class="slide" id="slide5">
           <div class="content">
-            <img src="https://i.postimg.cc/FFxY4NP7/image.jpg" alt="Couple Pic">
-            <h2>Don't you think we look great together? 🫠🫣</h2>
-            <div>
-              <button class="dodge" id="noBtn">Nahhh</button>
-              <button onclick="yesLine()">ofc..yeh bhi puchne wali baat h? 🤍</button>
-            </div>
+            <h1>Do you love me?</h1>
+            <button id="loveYes">Yes ❤️</button>
+            <button id="loveNo" class="dodge">No 🙅🏻‍♀️</button>
           </div>
         </section>
 
         <!-- Slide 6 -->
         <section class="slide" id="slide6">
           <div class="content">
-            <h1>WILL YOU BE MY Boyfriend ❤️?</h1>
-            <div class="side-by-side">
-              <img src="https://i.pinimg.com/originals/d8/b9/71/d8b97168488fdb3eb9533da493c8fa95.gif" alt="Final Gif">
-              <img src="https://i.postimg.cc/YqnHHqJ2/IMG-20250811-WA0042.jpg" alt="Pic Between GIFs"
-                   style="max-width: 20%; max-height: 50vh; object-fit: contain; border-radius: 15px;">
-              <img src="https://media.tenor.com/Je68nyCU_j8AAAAj/bubu-dudu-bubu-dudu-love.gif" alt="Bubu Dudu Love GIF">
-            </div>
-            <div>
-               <button onclick="finalLove()">YESSSSSS Baby 🤍</button>
-              <button class="dodge" id="thinkBtn">Socha parega</button>
-            </div>
+            <h1>Happy Birthday, my love! 🥰</h1>
+            <p>May your day be filled with laughter, joy, and endless love. 🎉</p>
+            <p>Here's to us, forever and always. ❤️</p>
           </div>
         </section>
       `;
 
-      currentSlide = 1;
+      // Buttons logic for laptop
 
-      // Reassign buttons & functions after dynamic content insertion
+      // Play song button
       document.getElementById("playSongBtn").addEventListener("click", () => {
-        bgSong.play().catch(()=>{});
+        bgSong.play();
         document.getElementById("playSongBtn").style.display = "none";
         document.getElementById("okBtn").style.display = "inline-block";
       });
 
-      window.nextSlide = nextSlide;  // expose for inline onclick
-
-      window.heartsPage = function(){
-        document.getElementById("slide3").innerHTML = `
-          <div class="content">
-            <h1>Oye Jaan sunn na</h1>
-            <p>❤️</p>
-            <button onclick="nextSlide(4)">Hanji kachua 🐢..Bolo</button>
-          </div>`;
-      };
-
-      window.sorryLine = function(){
-        alert("Pitenge re ..konsa baat nhi mana mene 😒🖕🏻");
-        nextSlide(4);
-      };
-
-      window.bhagOption = function(){
-        document.getElementById("slide4").innerHTML = `
-          <div class="content">
-            <h1>Bhaag Be!! 😝</h1>
-            <button onclick="nextSlide(5)">Sorry I love you jaan 😝🤍</button>
-          </div>`;
-      };
-
-      window.yesLine = function(){
-        alert("I KNEW IT!! 😎❤️");
-        document.getElementById("slide5").innerHTML = `
-          <div class="content">
-            <img src="https://i.postimg.cc/FFxY4NP7/image.jpg" alt="Couple Pic">
-            <p>MY WISH IS — I want us to be more than this.<br>Will you be mine? ❤️</p>
-            <div>
-              <button onclick="nextSlide(6)">Hanji Jaan 🤍</button>
-              <button onclick="extraPage()">Na patane mei aur mehenat lagega</button>
-            </div>
-          </div>`;
-      };
-
-      window.extraPage = function(){
-        document.getElementById("slide5").innerHTML = `
-          <div class="content">
-            <img src="https://i.postimg.cc/wvjjxs4M/IMG-20250610-WA0127.jpg" alt="Couple Pic">
-            <div class="extra-buttons">
-              <button onclick="nextSlide(6)">Ok mann gaya</button>
-              <button onclick="nextSlide(6)">Paglait mei innocent hun..mann gaya tha pehele hee 😁😗</button>
-            </div>
-          </div>`;
-      };
-
-      const heartsContainer = document.getElementById('hearts');
-      window.createHeart = function(){
-        const heart = document.createElement('span');
-        heart.className = 'heart';
-        heart.textContent = '❤️';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = (3 + Math.random()*3) + 's';
-        heartsContainer.appendChild(heart);
-        setTimeout(() => heart.remove(), 6000);
-      }
-      let heartInterval = null;
-      window.startHearts = function(){
-        if (heartInterval) return;
-        heartsContainer.style.display = 'block';
-        heartInterval = setInterval(createHeart, 400);
-      }
-      window.stopHearts = function(){
-        if (!heartInterval) return;
-        clearInterval(heartInterval);
-        heartInterval = null;
-        heartsContainer.innerHTML = '';
-        heartsContainer.style.display = 'none';
+      // Dodge buttons effect on slides 3,4,5
+      function dodgeButton(btn) {
+        btn.style.position = "relative";
+        btn.addEventListener("mouseenter", () => {
+          // Random move within 150px box
+          const x = (Math.random() * 200) - 100;
+          const y = (Math.random() * 100) - 50;
+          btn.style.transform = `translate(${x}px, ${y}px)`;
+        });
+        btn.addEventListener("mouseleave", () => {
+          btn.style.transform = "translate(0,0)";
+        });
       }
 
-      window.finalLove = function(){
-        startHearts();
-        const c = document.querySelector('#slide6 .content');
-        c.insertAdjacentHTML('beforeend', `<h2>Hey Boyfie...I love you my KHARUS ❤️</h2>`);
-        setTimeout(() => { alert("YAYYYY! Love you forever! ❤️"); }, 3000);
-      }
+      // Slide 3 dodge noBtn
+      const slide3No = document.querySelector("#slide3 #noBtn");
+      dodgeButton(slide3No);
 
-      // Dodge buttons for laptop version
-     document.addEventListener("mousemove", function (e) {
-  document.querySelectorAll(".dodge").forEach((btn) => {
-    const rect = btn.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const distX = e.clientX - centerX;
-    const distY = e.clientY - centerY;
-    const distance = Math.sqrt(distX ** 2 + distY ** 2);
+      // Slide 4 dodge noBtn2
+      const slide4No = document.querySelector("#slide4 #noBtn2");
+      dodgeButton(slide4No);
 
-    if (distance < 120) {
-      const randomX = Math.random() * (window.innerWidth - rect.width);
-      const randomY = Math.random() * (window.innerHeight - rect.height);
+      // Slide 5 dodge loveNo
+      const slide5No = document.querySelector("#slide5 #loveNo");
+      dodgeButton(slide5No);
 
-      // Smooth transition
-      btn.style.transition = "transform 0.3s ease";
-      btn.style.position = "fixed";
-      btn.style.left = randomX + "px";
-      btn.style.top = randomY + "px";
-    }
-  });
-});
+      // Slide 4 Yes button advances to slide5
+      document.getElementById("yesBtn").addEventListener("click", () => nextSlide(5));
 
+      // Slide 5 Yes button triggers hearts and final slide6
+      document.getElementById("loveYes").addEventListener("click", () => {
+        showHearts();
+        nextSlide(6);
+      });
     }
 
-    // --------- Mobile slides (same but no dodge buttons on slides 5 & 6) ---------
+    // --------- Mobile slides (simpler, no dodge) ---------
     function mobileSlides(){
       slideContainer.innerHTML = `
         <!-- Slide 1 -->
@@ -431,159 +348,87 @@
         <!-- Slide 3 -->
         <section class="slide" id="slide3">
           <div class="content">
-            <img src="https://i.postimg.cc/13zd4C64/Screenshot-2025-08-18-051704.png" alt="His Pic 2" />
-            <p>Hii my Hot sizziling boy 🫣</p>
-            <p>Dekho i know mene pehele bina bole kuch bhi kiya ho..jo bhi kiya ho..uske liye maafi jaan 🥺❤️<br>Pr ab toh apki baat mante hain na?</p>
-            <div>
-              <button onclick="heartsPage()">Hanji manti ho 🤍</button>
-              <button onclick="sorryLine()">Nhi manti bahut badmash ho aap 😝😋</button>
+            <h1>Feeling special? ❤️‍🔥</h1>
+            <p>Because you deserve all the love and happiness in the world, today and always.</p>
+            <div class="side-by-side">
+              <img src="https://i.postimg.cc/Dz6KNnGh/IMG-20230519-144858-01.jpg" alt="Cute couple" />
+              <img src="https://i.postimg.cc/xjNx6HYg/IMG-20230519-145024-01.jpg" alt="Cute couple" />
             </div>
+            <button onclick="nextSlide(4)">Yes, Love youuuuu ❤️</button>
+            <button disabled>Noooo 🙅🏻‍♀️</button>
           </div>
         </section>
 
         <!-- Slide 4 -->
         <section class="slide" id="slide4">
           <div class="content">
-            <div class="side-by-side">
-              <img src="https://i.postimg.cc/YSGyzvdH/2025-08-18-03-30-02-330.jpg" alt="Pic 1" />
-              <img src="https://i.postimg.cc/9FDTMy0C/2025-08-18-03-30-02-356.jpg" alt="Pic 2" />
-            </div>
-            <p id="q4">Ase kon karwayega tereko..bol ? koi milegi</p>
-            <div>
-              <button id="btn1" onclick="bhagOption()">Han aram se mil jayegi, HANDSOME jo hun (😎)</button>
-              <button onclick="nextSlide(5)">Chahiye bhi nhi 😗</button>
-            </div>
+            <h1>Feeling Good? 😘</h1>
+            <p>Let's move on!</p>
+            <button onclick="nextSlide(5)">Yes ❤️</button>
+            <button disabled>No 🙅🏻‍♀️</button>
           </div>
         </section>
 
-        <!-- Slide 5 (NO dodge button) -->
+        <!-- Slide 5 -->
         <section class="slide" id="slide5">
           <div class="content">
-            <img src="https://i.postimg.cc/FFxY4NP7/image.jpg" alt="Couple Pic">
-            <h2>Don't you think we look great together? 🫠🫣</h2>
-            <div>
-              <button disabled style="opacity:0.5; cursor:not-allowed;">Nahhh</button>
-              <button onclick="yesLine()">ofc..yeh bhi puchne wali baat h? 🤍</button>
-            </div>
+            <h1>Do you love me?</h1>
+            <button onclick="nextSlide(6)">Yes ❤️</button>
+            <button disabled>No 🙅🏻‍♀️</button>
           </div>
         </section>
 
-        <!-- Slide 6 (NO dodge button) -->
+        <!-- Slide 6 -->
         <section class="slide" id="slide6">
           <div class="content">
-            <h1>WILL YOU BE MY Boyfriend ❤️?</h1>
-            <div class="side-by-side">
-              <img src="https://i.pinimg.com/originals/d8/b9/71/d8b97168488fdb3eb9533da493c8fa95.gif" alt="Final Gif">
-              <img src="https://i.postimg.cc/YqnHHqJ2/IMG-20250811-WA0042.jpg" alt="Pic Between GIFs"
-                   style="max-width: 20%; max-height: 50vh; object-fit: contain; border-radius: 15px;">
-              <img src="https://media.tenor.com/Je68nyCU_j8AAAAj/bubu-dudu-bubu-dudu-love.gif" alt="Bubu Dudu Love GIF">
-            </div>
-            <div>
-              <button onclick="finalLove()">YESSSSSS Baby 🤍</button>
-              <button disabled style="opacity:0.5; cursor:not-allowed;">Socha parega</button>
-            </div>
+            <h1>Happy Birthday, my love! 🥰</h1>
+            <p>May your day be filled with laughter, joy, and endless love. 🎉</p>
+            <p>Here's to us, forever and always. ❤️</p>
           </div>
         </section>
       `;
 
-      currentSlide = 1;
-
-      // Reassign buttons & functions after dynamic content insertion
+      // Play song button
       document.getElementById("playSongBtn").addEventListener("click", () => {
-        bgSong.play().catch(()=>{});
+        bgSong.play();
         document.getElementById("playSongBtn").style.display = "none";
         document.getElementById("okBtn").style.display = "inline-block";
       });
-
-      window.nextSlide = nextSlide;
-
-      window.heartsPage = function(){
-        document.getElementById("slide3").innerHTML = `
-          <div class="content">
-            <h1>Oye Jaan sunn na</h1>
-            <p>❤️</p>
-            <button onclick="nextSlide(4)">Hanji kachua 🐢..Bolo</button>
-          </div>`;
-      };
-
-      window.sorryLine = function(){
-        alert("Pitenge re ..konsa baat nhi mana mene 😒🖕🏻");
-        nextSlide(4);
-      };
-
-      window.bhagOption = function(){
-        document.getElementById("slide4").innerHTML = `
-          <div class="content">
-            <h1>Bhaag Be!! 😝</h1>
-            <button onclick="nextSlide(5)">Sorry I love you jaan 😝🤍</button>
-          </div>`;
-      };
-
-      window.yesLine = function(){
-        alert("I KNEW IT!! 😎❤️");
-        document.getElementById("slide5").innerHTML = `
-          <div class="content">
-            <img src="https://i.postimg.cc/FFxY4NP7/image.jpg" alt="Couple Pic">
-            <p>MY WISH IS — I want us to be more than this.<br>Will you be mine? ❤️</p>
-            <div>
-              <button onclick="nextSlide(6)">Hanji Jaan 🤍</button>
-              <button onclick="extraPage()">Na patane mei aur mehenat lagega</button>
-            </div>
-          </div>`;
-      };
-
-      window.extraPage = function(){
-        document.getElementById("slide5").innerHTML = `
-          <div class="content">
-            <img src="https://i.postimg.cc/wvjjxs4M/IMG-20250610-WA0127.jpg" alt="Couple Pic">
-            <div class="extra-buttons">
-              <button onclick="nextSlide(6)">Ok mann gaya</button>
-              <button onclick="nextSlide(6)">Paglait mei innocent hun..mann gaya tha pehele hee 😁😗</button>
-            </div>
-          </div>`;
-      };
-
-      const heartsContainer = document.getElementById('hearts');
-      window.createHeart = function(){
-        const heart = document.createElement('span');
-        heart.className = 'heart';
-        heart.textContent = '❤️';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = (3 + Math.random()*3) + 's';
-        heartsContainer.appendChild(heart);
-        setTimeout(() => heart.remove(), 6000);
-      }
-      let heartInterval = null;
-      window.startHearts = function(){
-        if (heartInterval) return;
-        heartsContainer.style.display = 'block';
-        heartInterval = setInterval(createHeart, 400);
-      }
-      window.stopHearts = function(){
-        if (!heartInterval) return;
-        clearInterval(heartInterval);
-        heartInterval = null;
-        heartsContainer.innerHTML = '';
-        heartsContainer.style.display = 'none';
-      }
-
-      window.finalLove = function(){
-        startHearts();
-        const c = document.querySelector('#slide6 .content');
-        c.insertAdjacentHTML('beforeend', `<h2>Hey Boyfie...I love you my KHARUS ❤️</h2>`);
-        setTimeout(() => { alert("YAYYYY! Love you forever! ❤️"); }, 3000);
-      }
     }
 
-    // Device choice buttons on Slide 0
-    document.getElementById('mobileBtn').addEventListener('click', () => {
+    // --------- Hearts rain effect ---------
+    function showHearts(){
+      const heartsDiv = document.getElementById("hearts");
+      heartsDiv.style.display = "block";
+      const count = 50;
+
+      for(let i=0; i<count; i++){
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDelay = (Math.random() * 5) + "s";
+        heart.textContent = "❤️";
+        heartsDiv.appendChild(heart);
+
+        // Remove heart after animation (4s)
+        setTimeout(() => {
+          heart.remove();
+        }, 6000);
+      }
+      // Hide hearts after 7s
+      setTimeout(() => {
+        heartsDiv.style.display = "none";
+      }, 7000);
+    }
+
+    // Initial device selection event listeners
+    document.getElementById("mobileBtn").addEventListener("click", () => {
       mobileSlides();
     });
 
-    document.getElementById('laptopBtn').addEventListener('click', () => {
+    document.getElementById("laptopBtn").addEventListener("click", () => {
       laptopSlides();
     });
-
   </script>
 </body>
 </html>

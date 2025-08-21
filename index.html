@@ -1,209 +1,651 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>Happy Birthday❤️</title>
-  <style>
-    :root {
-      --pad-v: clamp(20px, 5vh, 50px);
-      --pad-h: clamp(10px, 5vw, 50px);
-      --content-max: 1000px;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Happy Birthday❤️</title>
+    <style>
+        /* CUSTOM FONTS from Google Fonts */
+        /* The 'display=swap' parameter ensures better font loading performance. */
+        @import url('https://fonts.googleapis.com/css2?family=Cookie&family=Fredericka+the+Great&family=Libre+Baskerville&family=Sacramento&display=swap');
 
-    html, body {
-      margin: 0; padding: 0;
-      height: 100%; width: 100%;
-      font-family: Arial, sans-serif;
-      overflow: hidden;
-      background: #fff;
-    }
+        :root {
+            --pad-v: clamp(20px, 5vh, 50px);
+            --pad-h: clamp(10px, 5vw, 50px);
+            --content-max: 1000px;
+        }
 
-    .slide-container {
-      position: relative;
-      width: 100vw; height: 100vh;
-      overflow: hidden;
-      z-index: 1;
-    }
+        html, body {
+            margin: 0; padding: 0;
+            height: 100%; width: 100%;
+            font-family: 'Libre Baskerville', serif; /* Primary font for the body */
+            overflow: hidden;
+            background: #fff;
+        }
+        
+        .slide-container {
+            position: relative;
+            width: 100vw; height: 100vh;
+            overflow: hidden;
+            z-index: 1;
+        }
 
-    .slide {
-      position: absolute; inset: 0;
-      display: none; /* toggled by .active */
-      align-items: center; justify-content: center;
-      text-align: center;
-      padding: var(--pad-v) var(--pad-h);
-      overflow: auto;
-      z-index: 2;
-      background: transparent;
-    }
-    .slide.active { display: flex; }
+        .slide {
+            position: absolute; inset: 0;
+            display: none; /* Toggled by .active class to show/hide slides */
+            align-items: center; justify-content: center;
+            text-align: center;
+            padding: var(--pad-v) var(--pad-h);
+            overflow: auto;
+            z-index: 2;
+            background: transparent;
+        }
+        .slide.active { display: flex; } /* Displays the active slide */
 
-    .slide::before {
-      content: "";
-      position: absolute; inset: 0;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: contain;
-      z-index: -2;
-      pointer-events: none;
-    }
-    .slide::after {
-      content: "";
-      position: absolute; inset: 0;
-      background: rgba(255,255,255,0.55);
-      z-index: -1;
-      pointer-events: none;
-    }
+        .slide::before {
+            content: "";
+            position: absolute; inset: 0;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain; /* Ensures background images fit within the slide */
+            z-index: -2;
+            pointer-events: none; /* Prevents the pseudo-element from interfering with clicks */
+        }
+        .slide::after {
+            content: "";
+            position: absolute; inset: 0;
+            background: rgba(255,255,255,0.55); /* White overlay for readability */
+            z-index: -1;
+            pointer-events: none;
+        }
 
-    /* Fixed Heart and love background for Slide 0 */
-    #slide0::before {
-      content: "";
-      position: absolute; inset: 0;
-      background-image: url('https://cliply.co/wp-content/uploads/2020/01/402001940_HEARTS_BG_400px.gif');
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      opacity: 1;      /* ✅ fixed */
-      z-index: -2;     /* ✅ fixed */
-      pointer-events: none;
-    }
+        /* Heart and love background for Slide 0 (initial slide) */
+        #slide0::before {
+            content: "";
+            position: absolute; inset: 0;
+            background-image: url('https://cliply.co/wp-content/uploads/2020/01/402001940_HEARTS_BG_400px.gif');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover; /* Covers the entire slide area */
+            opacity: 100;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-    /* Existing slide backgrounds */
-    #slide1::before { background-image: url('https://media1.tenor.com/m/1jKnE-r5T-EAAAAd/milk-and-mocha-bears-sad.gif'); }
-    #slide2::before { background-image: url('https://i.pinimg.com/originals/69/66/48/69664884a33ecc5049a40b4b02bd182f.gif'); }
-    #slide3::before { background-image: url('https://media.tenor.com/ZJ0t7DP3FjMAAAAj/milk-and-mocha-gif-mocha-makeing-love.gif'); }
-    #slide4::before { background-image: url('https://media3.giphy.com/media/JRsQiAN79bPWUv43Ko/source.gif'); }
-    #slide5::before { background-image: url('https://i.pinimg.com/originals/96/91/0a/96910a7cedeff19c958ac2a78286bd6f.gif'); }
-    #slide6::before {
-      background-image: url('https://c.tenor.com/KcREzPtBb-0AAAAC/tenor.gif');
-      background-size: cover;
-    }
+        /* Specific background images for each slide */
+        #slide1::before { background-image: url('https://media1.tenor.com/m/1jKnE-r5T-EAAAAd/milk-and-mocha-bears-sad.gif'); }
+        #slide2::before { background-image: url('https://i.pinimg.com/originals/69/66/48/69664884a33ecc5049a40b4b02bd182f.gif'); }
+        #slide3::before { background-image: url('https://media.tenor.com/ZJ0t7DP3FjMAAAAj/bubu-dudu-gif-mocha-makeing-love.gif'); }
+        #slide4::before { background-image: url('https://media3.giphy.com/media/JRsQiAN79bPWUv43Ko/source.gif'); }
+        #slide5::before { background-image: url('https://i.pinimg.com/originals/96/91/0a/96910a7cedeff19c958ac2a78286bd6f.gif'); }
+        #slide6::before { 
+            background-image: url('https://c.tenor.com/KcREzPtBb-0AAAAC/tenor.gif');
+            background-size: cover;
+        }
 
-    .content {
-      width: min(90vw, var(--content-max));
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: clamp(8px, 2vh, 18px);
-      position: relative;
-      z-index: 2;
-    }
+        .content {
+            width: min(90vw, var(--content-max)); /* Responsive width, capped at --content-max */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(8px, 2vh, 18px); /* Responsive spacing between elements */
+            position: relative;
+            z-index: 2;
+        }
 
-    img {
-      max-width: 90%;
-      max-height: 50vh;
-      object-fit: contain;
-      border-radius: 20px;
-      user-select: none;
-    }
+        img {
+            max-width: 90%;
+            max-height: 50vh;
+            object-fit: contain;
+            border-radius: 20px;
+            user-select: none; /* Prevents image selection */
+        }
 
-    h1, h2, p {
-      margin: 0;
-      color: #000;
-      font-weight: bold;
-      text-shadow: 1px 1px 3px #fff, -1px -1px 2px #fff;
-      user-select: none;
-    }
-    h1 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
-    h2 { font-size: clamp(1.2rem, 3.2vw, 2rem); }
-    p  { font-size: clamp(1rem, 2.6vw, 1.6rem); }
+        h1, h2, p {
+            margin: 0;
+            color: #000;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px #fff, -1px -1px 2px #fff; /* White text shadow for contrast */
+            user-select: none;
+        }
+        h1 { font-size: clamp(1.5rem, 4vw, 2.5rem); } /* Responsive font sizes */
+        h2 { font-size: clamp(1.2rem, 3.2vw, 2rem); }
+        p  { font-size: clamp(1rem, 2.6vw, 1.6rem); }
 
-    button {
-      background: #ff3366;
-      color: #fff;
-      border: none;
-      padding: clamp(8px, 1.8vh, 16px) clamp(16px, 3.5vw, 40px);
-      border-radius: 999px;
-      cursor: pointer;
-      font-size: clamp(1rem, 2.2vw, 1.4rem);
-      font-weight: 800;
-      transition: transform .08s ease, background .2s ease;
-      user-select: none;
-      white-space: nowrap;
-      position: relative;
-      z-index: 2;
-    }
-    button:hover { background: #ff5c8a; }
-    button:active { transform: scale(0.98); }
+        /* Custom font family styles */
+        .cookie-font {
+            font-family: 'Cookie', cursive;
+        }
+        .chalkboy-font {
+            font-family: 'Fredericka the Great', serif;
+        }
+        /* Note: 'josephsophia-font' is commented out as per previous instruction to remove local fonts. 
+           If you want to use a similar Google Font, you'd need to find one and add it to the @import URL. */
+        /* .josephsophia-font {
+            font-family: 'josephsophia', cursive;
+        } */
+        .sacramento-font {
+            font-family: 'Sacramento', cursive;
+        }
 
-    .dodge { position: relative; }
+        button {
+            background: #ff3366; /* Pink button background */
+            color: #fff;
+            border: none;
+            padding: clamp(8px, 1.8vh, 16px) clamp(16px, 3.5vw, 40px);
+            border-radius: 999px; /* Pill-shaped buttons */
+            cursor: pointer;
+            font-size: clamp(1rem, 2.2vw, 1.4rem);
+            font-weight: 800;
+            transition: transform .08s ease, background .2s ease; /* Smooth hover and active effects */
+            user-select: none;
+            white-space: nowrap;
+            position: relative;
+            z-index: 2;
+        }
+        button:hover { background: #ff5c8a; } /* Lighter pink on hover */
+        button:active { transform: scale(0.98); } /* Slight scale down on click */
 
-    .side-by-side {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: clamp(12px, 3vw, 30px);
-      flex-wrap: wrap;
-    }
-    .side-by-side img {
-      max-width: 45%;
-      max-height: 50vh;
-      margin: 0;
-    }
+        .dodge { position: relative; } /* Used for the "dodge" button effect */
 
-    @media (max-width: 600px) {
-      img { max-height: 40vh; }
-      .side-by-side img { max-width: 90%; }
-    }
+        .side-by-side {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(12px, 3vw, 30px);
+            flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+        }
+        .side-by-side img {
+            max-width: 45%; /* Limits width for side-by-side images */
+            max-height: 50vh;
+            margin: 0;
+        }
 
-    #slide3 p { font-size: clamp(0.9rem, 2.2vw, 1.4rem); }
+        /* Media query for smaller screens (mobile) */
+        @media (max-width: 600px) {
+            img { max-height: 40vh; }
+            .side-by-side img { max-width: 90%; } /* Images take more width on mobile */
+        }
 
-    /* Hearts rain */
-    .hearts {
-      position: fixed; inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 9999;
-      display: none;
-    }
-    .heart {
-      position: absolute;
-      color: red;
-      font-size: 6vw;
-      animation: fall 4s linear forwards;
-      user-select: none;
-    }
-    @keyframes fall {
-      0%   { transform: translateY(-10vh); }
-      100% { transform: translateY(110vh); }
-    }
+        #slide3 p { font-size: clamp(0.9rem, 2.2vw, 1.4rem); } /* Specific font size for slide 3 paragraph */
 
-    /* Extra buttons styling */
-    .extra-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
-    }
-  </style>
+        /* Hearts rain animation styling */
+        .hearts {
+            position: fixed; inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 9999;
+            display: none; /* Hidden by default, shown when hearts start */
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 6vw; /* Responsive heart size */
+            animation: fall 4s linear forwards; /* Animation for hearts falling */
+            user-select: none;
+        }
+        @keyframes fall {
+            0%  { transform: translateY(-10vh); } /* Starts above viewport */
+            100% { transform: translateY(110vh); } /* Falls below viewport */
+        }
+
+        /* Styling for extra buttons, typically stacked vertically */
+        .extra-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="slide-container" id="slideContainer">
+    <div class="slide-container" id="slideContainer">
 
-    <!-- Slide 0: Device choice -->
-    <section class="slide active" id="slide0">
-      <div class="content">
-        <h1>User is using:</h1>
-        <div style="display:flex; gap:20px; justify-content:center; margin-top: 20px;">
-          <button id="mobileBtn">Mobile</button>
-          <button id="laptopBtn">Laptop</button>
-        </div>
-      </div>
-    </section>
+        <section class="slide active" id="slide0">
+            <div class="content">
+                <h2 class="cookie-font">To someone very special🤍</h2>
+                <h1>You are using:</h1>
+                <div style="display:flex; gap:20px; justify-content:center; margin-top: 20px;">
+                    <button id="mobileBtn">Mobile</button>
+                    <button id="laptopBtn">Laptop</button>
+                </div>
+            </div>
+        </section>
 
-  </div>
+    </div>
 
-  <!-- Audio -->
-  <audio id="bgSong" src="https://files.catbox.moe/e1az47.mp3"></audio>
+    <!-- Background music for the page -->
+    <audio id="bgSong" src="https://files.catbox.moe/e1az47.mp3"></audio>
 
-  <div class="hearts" id="hearts"></div>
+    <!-- Container for the falling hearts animation -->
+    <div class="hearts" id="hearts"></div>
 
-  <script>
-    /* your full JS unchanged (mobileSlides + laptopSlides) */
-    /* keeping the same as you pasted earlier */
-  </script>
+    <script>
+        const slideContainer = document.getElementById('slideContainer');
+        const bgSong = document.getElementById("bgSong");
+
+        // Helper function to navigate to the next slide by its ID
+        function nextSlide(n) {
+            const oldEl = slideContainer.querySelector(".slide.active");
+            const newEl = document.getElementById("slide" + n);
+            if (!newEl) return; // Exit if the target slide doesn't exist
+            oldEl.classList.remove("active");
+            newEl.classList.add("active");
+        }
+
+        // --- Laptop slides (original content and functionality) ---
+        function laptopSlides(){
+            slideContainer.innerHTML = `
+                <section class="slide active" id="slide1">
+                    <div class="content">
+                        <h1>Hey..long time no see?👀</h1>
+                        <h2>Missed me? ik u did🥺</h2>
+                        <p>Sorry for treating u so badly a few months ago..most apx. 1yr🥺</p>
+                        <button id="playSongBtn">Play song 👉🏻 This song reminds me of you 🎵</button>
+                        <button id="okBtn" style="display:none;" onclick="nextSlide(2)">It's Okay..no worries cutie ❤️</button>
+                    </div>
+                </section>
+
+                <section class="slide" id="slide2">
+                    <div class="content">
+                        <h1 class="chalkboy-font">Helloo Baby ❤️</h1>
+                        <img src="https://i.postimg.cc/T1Rz0RyJ/2025-08-18-03-01-33-493.jpg" alt="His Pic" />
+                        <p>To my favourite 😚😍 Happy Birthday to the one who makes my world brighter every single day!</p>
+                        <button onclick="nextSlide(3)">Agee toh dekh 😁</button>
+                    </div>
+                </section>
+
+                <section class="slide" id="slide3">
+                    <div class="content">
+                        <img src="https://i.postimg.cc/13zd4C64/Screenshot-2025-08-18-051704.png" alt="His Pic 2" />
+                        <p class="chalkboy-font">Hii my Hot sizziling boy 🫣</p>
+                        <p>Dekho i know mene pehele bina bole kuch bhi kiya ho..jo bhi kiya ho..uske liye maafi jaan 🥺❤️<br>Pr ab toh apki baat mante hain na?</p>
+                        <div>
+                            <button onclick="heartsPage()">Hanji manti ho 🤍</button>
+                            <button onclick="sorryLine()">Nhi manti bahut badmash ho aap 😝😋</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide" id="slide4">
+                    <div class="content">
+                        <div class="side-by-side">
+                            <img src="https://i.postimg.cc/YSGyzvdH/2025-08-18-03-30-02-330.jpg" alt="Pic 1" />
+                            <img src="https://i.postimg.cc/9FDTMy0C/2025-08-18-03-30-02-356.jpg" alt="Pic 2" />
+                        </div>
+                        <p id="q4">Ase kon karwayega tereko..bol ? koi milegi</p>
+                        <div>
+                            <button id="btn1" onclick="bhagOption()">Han aram se mil jayegi, HANDSOME jo hun (😎)</button>
+                            <button id="btn2" onclick="nextSlide(5)">Chahiye bhi nhi 😗</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide" id="slide5">
+                    <div class="content">
+                        <img src="https://i.postimg.cc/FFxY4NP7/image.jpg" alt="Couple Pic">
+                        <h2>Don't you think we look great together? 🫠🫣</h2>
+                        <div>
+                            <button class="dodge" id="noBtn">Nahhh</button>
+                            <button onclick="yesLine()">ofc..yeh bhi puchne wali baat h? 🤍</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide" id="slide6">
+                    <div class="content">
+                        <!-- josephsophia-font is a placeholder; consider replacing with a Google Font if needed -->
+                        <h1 class="josephsophia-font">Will you be my Boyfriend ❤️?</h1> 
+                        <div class="side-by-side">
+                            <img src="https://i.pinimg.com/originals/d8/b9/71/d8b97168488fdb3eb9533da493c8fa95.gif" alt="Final Gif">
+                            <img src="https://i.postimg.cc/YqnHHqJ2/IMG-20250811-WA0042.jpg" alt="Pic Between GIFs"
+                                    style="max-width: 20%; max-height: 50vh; object-fit: contain; border-radius: 15px;">
+                            <img src="https://media.tenor.com/Je68nyCU_j8AAAAj/bubu-dudu-bubu-dudu-love.gif" alt="Bubu Dudu Love GIF">
+                        </div>
+                        <div>
+                            <button onclick="finalLove()">YESSSSSS Baby 🤍</button>
+                            <button class="dodge" id="thinkBtn">Socha parega</button>
+                        </div>
+                    </div>
+                </section>
+            `;
+
+            currentSlide = 1; // Resets to the first slide for laptop view
+
+            // Event listener for playing the song
+            document.getElementById("playSongBtn").addEventListener("click", () => {
+                bgSong.play().catch(()=>{}); // Attempt to play, catch potential errors (e.g., user gesture required)
+                document.getElementById("playSongBtn").style.display = "none";
+                document.getElementById("okBtn").style.display = "inline-block";
+            });
+
+            window.nextSlide = nextSlide; // Expose nextSlide globally for inline onclick attributes
+
+            // Dynamic content update functions for laptop version
+            window.heartsPage = function(){
+                document.getElementById("slide3").innerHTML = `
+                    <div class="content">
+                        <h1>Oye Jaan sunn na</h1>
+                        <p>❤️</p>
+                        <button onclick="nextSlide(4)">Hanji kachua 🐢..Bolo</button>
+                    </div>`;
+            };
+
+            window.sorryLine = function(){
+                // Replaced alert with a custom message box for better UX
+                showCustomAlert("Pitenge re ..konsa baat nhi mana mene 😒🖕🏻");
+                nextSlide(4);
+            };
+
+            window.bhagOption = function(){
+                document.getElementById("slide4").innerHTML = `
+                    <div class="content">
+                        <h1>Bhaag Be!! 😝</h1>
+                        <button onclick="nextSlide(5)">Sorry I love you jaan 😝🤍</button>
+                    </div>`;
+            };
+
+            window.yesLine = function(){
+                // Replaced alert with a custom message box
+                showCustomAlert("I KNEW IT!! 😎❤️");
+                document.getElementById("slide5").innerHTML = `
+                    <div class="content">
+                        <img src="https://i.postimg.cc/FFxY4NP7/image.jpg" alt="Couple Pic">
+                        <p>MY WISH IS — I want us to be more than this.<br>Will you be mine? ❤️</p>
+                        <div>
+                            <button onclick="nextSlide(6)">Hanji Jaan 🤍</button>
+                            <button onclick="extraPage()">Na patane mei aur mehenat lagega</button>
+                        </div>
+                    </div>`;
+            };
+
+            window.extraPage = function(){
+                document.getElementById("slide5").innerHTML = `
+                    <div class="content">
+                        <img src="https://i.postimg.cc/wvjjxs4M/IMG-20250610-WA0127.jpg" alt="Couple Pic">
+                        <div class="extra-buttons">
+                            <button onclick="nextSlide(6)">Ok mann gaya</button>
+                            <button onclick="nextSlide(6)">Paglet mei innocent hun..mann gaya tha pehele hee 😁😗</button>
+                        </div>
+                    </div>`;
+            };
+
+            const heartsContainer = document.getElementById('hearts');
+            window.createHeart = function(){
+                const heart = document.createElement('span');
+                heart.className = 'heart';
+                heart.textContent = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (3 + Math.random()*3) + 's';
+                heartsContainer.appendChild(heart);
+                setTimeout(() => heart.remove(), 6000); // Remove heart after animation
+            }
+            let heartInterval = null;
+            window.startHearts = function(){
+                if (heartInterval) return; // Prevent multiple intervals
+                heartsContainer.style.display = 'block';
+                heartInterval = setInterval(createHeart, 400); // Creates a new heart every 400ms
+            }
+            window.stopHearts = function(){
+                if (!heartInterval) return;
+                clearInterval(heartInterval);
+                heartInterval = null;
+                heartsContainer.innerHTML = ''; // Clears all hearts
+                heartsContainer.style.display = 'none';
+            }
+
+            window.finalLove = function(){
+                startHearts(); // Start the hearts animation
+                const c = document.querySelector('#slide6 .content');
+                c.insertAdjacentHTML('beforeend', `<h2 class="sacramento-font">Hey bofiee .. i love you kharus ❤️</h2>`);
+                // Replaced alert with a custom message box
+                setTimeout(() => { showCustomAlert("YAYYYY! Love you forever! ❤️"); }, 3000); 
+            }
+
+            // Dodge buttons functionality for laptop version
+            document.addEventListener("mousemove", function (e) {
+                document.querySelectorAll(".dodge").forEach((btn) => {
+                    const rect = btn.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    const distX = e.clientX - centerX;
+                    const distY = e.clientY - centerY;
+                    const distance = Math.sqrt(distX ** 2 + distY ** 2);
+
+                    if (distance < 120) { // If mouse is too close
+                        const randomX = Math.random() * (window.innerWidth - rect.width);
+                        const randomY = Math.random() * (window.innerHeight - rect.height);
+
+                        btn.style.transition = "transform 0.3s ease";
+                        btn.style.position = "fixed";
+                        btn.style.left = randomX + "px";
+                        btn.style.top = randomY + "px";
+                    }
+                });
+            });
+        }
+
+        // --- Mobile slides (similar to laptop but without dodge buttons) ---
+        function mobileSlides(){
+            slideContainer.innerHTML = `
+                <section class="slide active" id="slide1">
+                    <div class="content">
+                        <h1>Hey..long time no see?😊</h1>
+                        <p>Sorry for treating u so badly before some months..most apx. 1yr</p>
+                        <button id="playSongBtn">Play song 👉🏻 This song reminds me of you 🎵</button>
+                        <button id="okBtn" style="display:none;" onclick="nextSlide(2)">It's Okay..no worries cutie ❤️</button>
+                    </div>
+                </section>
+
+                <section class="slide" id="slide2">
+                    <div class="content">
+                        <h1 class="chalkboy-font">Helloo Baby ❤️</h1>
+                        <img src="https://i.postimg.cc/T1Rz0RyJ/2025-08-18-03-01-33-493.jpg" alt="His Pic" />
+                        <p>To my favourite 😚😍 Happy Birthday to the one who makes my world brighter every single day!</p>
+                        <button onclick="nextSlide(3)">Agee toh dekh 😁</button>
+                    </div>
+                </section>
+
+                <section class="slide" id="slide3">
+                    <div class="content">
+                        <img src="https://i.postimg.cc/13zd4C64/Screenshot-2025-08-18-051704.png" alt="His Pic 2" />
+                        <p class="chalkboy-font">Hii my Hot sizziling boy 🫣</p>
+                        <p>Dekho i know mene pehele bina bole kuch bhi kiya ho..jo bhi kiya ho..uske liye maafi jaan 🥺❤️<br>Pr ab toh apki baat mante hain na?</p>
+                        <div>
+                            <button onclick="heartsPage()">Hanji manti ho 🤍</button>
+                            <button onclick="sorryLine()">Nhi manti bahut badmash ho aap 😝😋</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide" id="slide4">
+                    <div class="content">
+                        <div class="side-by-side">
+                            <img src="https://i.postimg.cc/YSGyzvdH/2025-08-18-03-30-02-330.jpg" alt="Pic 1" />
+                            <img src="https://i.postimg.cc/9FDTMy0C/2025-08-18-03-30-02-356.jpg" alt="Pic 2" />
+                        </div>
+                        <p id="q4">Ase kon karwayega tereko..bol ? koi milegi</p>
+                        <div>
+                            <button id="btn1" onclick="bhagOption()">Han aram se mil jayegi, HANDSOME jo hun (😎)</button>
+                            <button onclick="nextSlide(5)">Chahiye bhi nhi 😗</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide" id="slide5">
+                    <div class="content">
+                        <img src="https://i.postimg.cc/FFxY4NP7/image.jpg" alt="Couple Pic">
+                        <h2>Don't you think we look great together? 🫠🫣</h2>
+                        <div>
+                            <!-- Disabled button for mobile to avoid dodge effect -->
+                            <button disabled style="opacity:0.5; cursor:not-allowed;">Nahhh</button> 
+                            <button onclick="yesLine()">ofc..yeh bhi puchne wali baat h? 🤍</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="slide" id="slide6">
+                    <div class="content">
+                         <!-- josephsophia-font is a placeholder; consider replacing with a Google Font if needed -->
+                        <h1 class="josephsophia-font">WILL YOU BE MY Boyfriend ❤️?</h1>
+                        <div class="side-by-side">
+                            <img src="https://i.pinimg.com/originals/d8/b9/71/d8b97168488fdb3eb9533da493c8fa95.gif" alt="Final Gif">
+                            <img src="https://i.postimg.cc/YqnHHqJ2/IMG-20250811-WA0042.jpg" alt="Pic Between GIFs"
+                                    style="max-width: 20%; max-height: 50vh; object-fit: contain; border-radius: 15px;">
+                            <img src="https://media.tenor.com/Je68nyCU_j8AAAAj/bubu-dudu-bubu-dudu-love.gif" alt="Bubu Dudu Love GIF">
+                        </div>
+                        <div>
+                            <button onclick="finalLove()">YESSSSSS Baby 🤍</button>
+                            <!-- Disabled button for mobile to avoid dodge effect -->
+                            <button disabled style="opacity:0.5; cursor:not-allowed;">Socha parega</button>
+                        </div>
+                    </div>
+                </section>
+            `;
+
+            currentSlide = 1;
+
+            // Event listener for playing the song for mobile
+            document.getElementById("playSongBtn").addEventListener("click", () => {
+                bgSong.play().catch(()=>{});
+                document.getElementById("playSongBtn").style.display = "none";
+                document.getElementById("okBtn").style.display = "inline-block";
+            });
+
+            window.nextSlide = nextSlide;
+
+            // Dynamic content update functions for mobile version (same as laptop)
+            window.heartsPage = function(){
+                document.getElementById("slide3").innerHTML = `
+                    <div class="content">
+                        <h1>Oye Jaan sunn na</h1>
+                        <p>❤️</p>
+                        <button onclick="nextSlide(4)">Hanji kachua 🐢..Bolo</button>
+                    </div>`;
+            };
+
+            window.sorryLine = function(){
+                showCustomAlert("Pitenge re ..konsa baat nhi mana mene 😒🖕🏻");
+                nextSlide(4);
+            };
+
+            window.bhagOption = function(){
+                document.getElementById("slide4").innerHTML = `
+                    <div class="content">
+                        <h1>Bhaag Be!! 😝</h1>
+                        <button onclick="nextSlide(5)">Sorry I love you jaan 😝🤍</button>
+                    </div>`;
+            };
+
+            window.yesLine = function(){
+                showCustomAlert("I KNEW IT!! 😎❤️");
+                document.getElementById("slide5").innerHTML = `
+                    <div class="content">
+                        <img src="https://i.postimg.cc/FFxY4NP7/image.jpg" alt="Couple Pic">
+                        <p>MY WISH IS — I want us to be more than this.<br>Will you be mine? ❤️</p>
+                        <div>
+                            <button onclick="nextSlide(6)">Hanji Jaan 🤍</button>
+                            <button onclick="extraPage()">Na patane mei aur mehenat lagega</button>
+                        </div>
+                    </div>`;
+            };
+
+            window.extraPage = function(){
+                document.getElementById("slide5").innerHTML = `
+                    <div class="content">
+                        <img src="https://i.postimg.cc/wvjjxs4M/IMG-20250610-WA0127.jpg" alt="Couple Pic">
+                        <div class="extra-buttons">
+                            <button onclick="nextSlide(6)">Ok mann gaya</button>
+                            <button onclick="nextSlide(6)">Paglait mei innocent hun..mann gaya tha pehele hee 😁😗</button>
+                        </div>
+                    </div>`;
+            };
+
+            const heartsContainer = document.getElementById('hearts');
+            window.createHeart = function(){
+                const heart = document.createElement('span');
+                heart.className = 'heart';
+                heart.textContent = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (3 + Math.random()*3) + 's';
+                heartsContainer.appendChild(heart);
+                setTimeout(() => heart.remove(), 6000);
+            }
+            let heartInterval = null;
+            window.startHearts = function(){
+                if (heartInterval) return;
+                heartsContainer.style.display = 'block';
+                heartInterval = setInterval(createHeart, 400);
+            }
+            window.stopHearts = function(){
+                if (!heartInterval) return;
+                clearInterval(heartInterval);
+                heartInterval = null;
+                heartsContainer.innerHTML = '';
+                heartsContainer.style.display = 'none';
+            }
+
+            window.finalLove = function(){
+                startHearts();
+                const c = document.querySelector('#slide6 .content');
+                c.insertAdjacentHTML('beforeend', `<h2 class="sacramento-font">Hey bofiee .. i love you kharus ❤️</h2>`);
+                setTimeout(() => { showCustomAlert("YAYYYY! Love you forever! ❤️"); }, 3000);
+            }
+        }
+
+        // --- Custom Alert Box ---
+        function showCustomAlert(message) {
+            // Create overlay
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center;
+                z-index: 10000;
+            `;
+
+            // Create alert box
+            const alertBox = document.createElement('div');
+            alertBox.style.cssText = `
+                background: white; padding: 30px; border-radius: 15px; text-align: center;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3); max-width: 90%;
+                font-family: 'Libre Baskerville', serif;
+            `;
+
+            // Message content
+            const messageEl = document.createElement('p');
+            messageEl.textContent = message;
+            messageEl.style.cssText = `
+                font-size: clamp(1rem, 4vw, 1.5rem); margin-bottom: 20px; color: #333;
+            `;
+
+            // Close button
+            const closeBtn = document.createElement('button');
+            closeBtn.textContent = 'OK';
+            closeBtn.style.cssText = `
+                background: #ff3366; color: white; border: none; padding: 10px 25px;
+                border-radius: 999px; cursor: pointer; font-size: clamp(0.9rem, 3vw, 1.2rem);
+            `;
+            closeBtn.onclick = () => overlay.remove(); // Remove overlay when button is clicked
+
+            alertBox.appendChild(messageEl);
+            alertBox.appendChild(closeBtn);
+            overlay.appendChild(alertBox);
+            document.body.appendChild(overlay);
+        }
+
+
+        // Device choice buttons on Slide 0
+        document.getElementById('mobileBtn').addEventListener('click', () => {
+            mobileSlides();
+        });
+
+        document.getElementById('laptopBtn').addEventListener('click', () => {
+            laptopSlides();
+        });
+
+    </script>
 </body>
 </html>

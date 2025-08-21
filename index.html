@@ -6,7 +6,8 @@
     <title>Happy Birthday❤️</title>
     <style>
         /* CUSTOM FONTS from Google Fonts */
-        /* The 'display=swap' parameter ensures better font loading performance. */
+        /* The 'display=swap' parameter ensures better font loading performance by
+           displaying a fallback font until the custom font is ready. */
         @import url('https://fonts.googleapis.com/css2?family=Cookie&family=Fredericka+the+Great&family=Libre+Baskerville&family=Sacramento&display=swap');
 
         :root {
@@ -120,8 +121,9 @@
         .chalkboy-font {
             font-family: 'Fredericka the Great', serif;
         }
-        /* Note: 'josephsophia-font' is commented out as per previous instruction to remove local fonts. 
-           If you want to use a similar Google Font, you'd need to find one and add it to the @import URL. */
+        /* The 'josephsophia-font' class definition is removed as it referred to a local font
+           that was requested to be removed. Elements that previously used this class
+           will now fall back to the main body font or a new assigned Google Font. */
         /* .josephsophia-font {
             font-family: 'josephsophia', cursive;
         } */
@@ -297,8 +299,8 @@
 
                 <section class="slide" id="slide6">
                     <div class="content">
-                        <!-- josephsophia-font is a placeholder; consider replacing with a Google Font if needed -->
-                        <h1 class="josephsophia-font">Will you be my Boyfriend ❤️?</h1> 
+                        <!-- Changed from josephsophia-font to chalkboy-font to use a loaded Google Font -->
+                        <h1 class="chalkboy-font">Will you be my Boyfriend ❤️?</h1> 
                         <div class="side-by-side">
                             <img src="https://i.pinimg.com/originals/d8/b9/71/d8b97168488fdb3eb9533da493c8fa95.gif" alt="Final Gif">
                             <img src="https://i.postimg.cc/YqnHHqJ2/IMG-20250811-WA0042.jpg" alt="Pic Between GIFs"
@@ -489,8 +491,8 @@
 
                 <section class="slide" id="slide6">
                     <div class="content">
-                         <!-- josephsophia-font is a placeholder; consider replacing with a Google Font if needed -->
-                        <h1 class="josephsophia-font">WILL YOU BE MY Boyfriend ❤️?</h1>
+                         <!-- Changed from josephsophia-font to chalkboy-font to use a loaded Google Font -->
+                        <h1 class="chalkboy-font">WILL YOU BE MY Boyfriend ❤️?</h1>
                         <div class="side-by-side">
                             <img src="https://i.pinimg.com/originals/d8/b9/71/d8b97168488fdb3eb9533da493c8fa95.gif" alt="Final Gif">
                             <img src="https://i.postimg.cc/YqnHHqJ2/IMG-20250811-WA0042.jpg" alt="Pic Between GIFs"
@@ -572,68 +574,70 @@
                 heart.style.left = Math.random() * 100 + 'vw';
                 heart.style.animationDuration = (3 + Math.random()*3) + 's';
                 heartsContainer.appendChild(heart);
-                setTimeout(() => heart.remove(), 6000);
+                setTimeout(() => heart.remove(), 6000); // Remove heart after animation
             }
             let heartInterval = null;
             window.startHearts = function(){
-                if (heartInterval) return;
+                if (heartInterval) return; // Prevent multiple intervals
                 heartsContainer.style.display = 'block';
-                heartInterval = setInterval(createHeart, 400);
+                heartInterval = setInterval(createHeart, 400); // Creates a new heart every 400ms
             }
             window.stopHearts = function(){
                 if (!heartInterval) return;
                 clearInterval(heartInterval);
                 heartInterval = null;
-                heartsContainer.innerHTML = '';
+                heartsContainer.innerHTML = ''; // Clears all hearts
                 heartsContainer.style.display = 'none';
             }
 
             window.finalLove = function(){
-                startHearts();
+                startHearts(); // Start the hearts animation
                 const c = document.querySelector('#slide6 .content');
                 c.insertAdjacentHTML('beforeend', `<h2 class="sacramento-font">Hey bofiee .. i love you kharus ❤️</h2>`);
-                setTimeout(() => { showCustomAlert("YAYYYY! Love you forever! ❤️"); }, 3000);
+                setTimeout(() => { showCustomAlert("YAYYYY! Love you forever! ❤️"); }, 3000); 
             }
         }
 
         // --- Custom Alert Box ---
+        // This function creates a simple modal alert instead of using the browser's native alert().
         function showCustomAlert(message) {
-            // Create overlay
+            // Create overlay to dim the background
             const overlay = document.createElement('div');
             overlay.style.cssText = `
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%;
                 background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center;
-                z-index: 10000;
+                z-index: 10000; /* Ensure it's on top of everything */
             `;
 
-            // Create alert box
+            // Create the alert box itself
             const alertBox = document.createElement('div');
             alertBox.style.cssText = `
                 background: white; padding: 30px; border-radius: 15px; text-align: center;
                 box-shadow: 0 5px 15px rgba(0,0,0,0.3); max-width: 90%;
-                font-family: 'Libre Baskerville', serif;
+                font-family: 'Libre Baskerville', serif; /* Use main font for the alert */
             `;
 
-            // Message content
+            // Message content within the alert box
             const messageEl = document.createElement('p');
             messageEl.textContent = message;
             messageEl.style.cssText = `
                 font-size: clamp(1rem, 4vw, 1.5rem); margin-bottom: 20px; color: #333;
             `;
 
-            // Close button
+            // Close button for the alert
             const closeBtn = document.createElement('button');
             closeBtn.textContent = 'OK';
             closeBtn.style.cssText = `
                 background: #ff3366; color: white; border: none; padding: 10px 25px;
                 border-radius: 999px; cursor: pointer; font-size: clamp(0.9rem, 3vw, 1.2rem);
             `;
-            closeBtn.onclick = () => overlay.remove(); // Remove overlay when button is clicked
+            closeBtn.onclick = () => overlay.remove(); // Remove the entire overlay when button is clicked
 
+            // Append elements to build the alert structure
             alertBox.appendChild(messageEl);
             alertBox.appendChild(closeBtn);
             overlay.appendChild(alertBox);
-            document.body.appendChild(overlay);
+            document.body.appendChild(overlay); // Add the overlay to the document body
         }
 
 
